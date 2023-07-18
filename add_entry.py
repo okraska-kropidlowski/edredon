@@ -1,13 +1,21 @@
+#Imports
 import tkinter
 from tkinter import ttk
 import tkintermapview
 from tkcalendar import Calendar, DateEntry
 
+#Reading the bird species list from a file
+species = []
+with open('species_list.txt') as inFile:
+    species = [line for line in inFile]
+
+#Window definition
 new_entry = tkinter.Tk()
 new_entry.title("Add new entry")
 new_entry.geometry("1024x768")
 new_entry.resizable(False, False)
 
+#Functions definition
 def open_location():
     global location
     location_window = tkinter.Toplevel()
@@ -29,13 +37,14 @@ def open_location():
 
     location_window.mainloop()
 
+#Window and widgets layout
 frame = tkinter.Frame(new_entry)
 frame.pack()
 
 species_label = tkinter.LabelFrame(frame, text="OBSERVED SPECIES")
 species_label.grid(row=1)
 
-select_species = ttk.Combobox(species_label, state="readonly", values=["Funny Bird", "Funnier Bird", "Even Funnier Bird", "Funniest Bird"])
+select_species = ttk.Combobox(species_label, state="readonly", values=tuple(species))
 select_species.grid(row=1, column=0)
 
 location_date_label = tkinter.LabelFrame(frame, text="LOCATION AND DATE")

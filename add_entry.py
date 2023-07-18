@@ -16,7 +16,8 @@ def open_location():
 
     def select_location(coordinates):
         print("Observation location:", coordinates)
-        location.config(text=coordinates)
+        coordinates_simple = tuple([float("{0:.5f}".format(n)) for n in coordinates])
+        location.config(text=coordinates_simple)
         location_window.destroy()
 
     map_widget = tkintermapview.TkinterMapView(location_window, width=800, height=600, corner_radius=0)

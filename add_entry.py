@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import ttk
 import tkintermapview
 from tkcalendar import Calendar, DateEntry
 
@@ -31,21 +32,27 @@ def open_location():
 frame = tkinter.Frame(new_entry)
 frame.pack()
 
+species_label = tkinter.LabelFrame(frame, text="OBSERVED SPECIES")
+species_label.grid(row=1)
+
+select_species = ttk.Combobox(species_label, state="readonly", values=["Funny Bird", "Funnier Bird", "Even Funnier Bird", "Funniest Bird"])
+select_species.grid(row=1, column=0)
+
 location_date_label = tkinter.LabelFrame(frame, text="LOCATION AND DATE")
-location_date_label.grid(row=0)
+location_date_label.grid(row=2)
 
 select_location = tkinter.LabelFrame(location_date_label, text="Select observation location:")
-select_location.grid(row=0, column=0)
+select_location.grid(row=2, column=0)
 location_button = tkinter.Button(select_location, text="Open map view", command=open_location)
 location_button.grid(column=0)
 
 show_location = tkinter.LabelFrame(location_date_label, text="Observation location:")
-show_location.grid(row=0, column=1)
+show_location.grid(row=2, column=1)
 location = tkinter.Label(show_location, text="")
 location.grid(column=0)
 
 select_date = tkinter.LabelFrame(location_date_label, text="Select observation date:")
-select_date.grid(row=0, column=2)
+select_date.grid(row=2, column=2)
 date_button = DateEntry(select_date, date_pattern='dd.mm.yyyy')
 date_button.grid(column=0)
 

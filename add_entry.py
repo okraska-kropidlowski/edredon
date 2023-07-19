@@ -6,9 +6,8 @@ from tkcalendar import Calendar, DateEntry
 
 #Reading the bird species list from a file
 species_list = []
-with open('species_list') as inFile:
+with open('species_list', encoding="UTF-8") as inFile:
     species_list = [line for line in inFile]
-#species = [tuple(map(lambda x: x.encode(encoding = 'UTF-8', errors = 'strict'), bird)) for bird in species]
 species_list_latin = []
 with open('species_list_latin') as inFile:
     species_list_latin = [line for line in inFile]
@@ -79,7 +78,7 @@ date_button = DateEntry(select_date, date_pattern='dd.mm.yyyy')
 date_button.grid(column=0)
 
 #Entry saving
-save_button = tkinter.Button(frame, text="Save observation", command=save_entry)
+save_button = tkinter.Button(frame, text="Add observation", command=save_entry)
 save_button.grid(row=3, column=0, sticky="news", padx=20, pady=10)
 
 new_entry.mainloop()

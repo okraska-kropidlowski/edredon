@@ -6,8 +6,12 @@ from tkcalendar import Calendar, DateEntry
 
 #Reading the bird species list from a file
 species = []
-with open('species_list.txt') as inFile:
+with open('species_list') as inFile:
     species = [line for line in inFile]
+#species = [tuple(map(lambda x: x.encode(encoding = 'UTF-8', errors = 'strict'), bird)) for bird in species]
+species_latin = []
+with open('species_list_latin') as inFile:
+    species_latin = [line for line in inFile]
 
 #Window definition
 new_entry = tkinter.Tk()
@@ -45,6 +49,7 @@ species_label = tkinter.LabelFrame(frame, text="OBSERVED SPECIES")
 species_label.grid(row=1)
 
 select_species = ttk.Combobox(species_label, state="readonly", values=tuple(species))
+select_species.current=""
 select_species.grid(row=1, column=0)
 
 location_date_label = tkinter.LabelFrame(frame, text="LOCATION AND DATE")

@@ -4,7 +4,7 @@ from tkinter import ttk
 import tkintermapview
 from tkcalendar import DateEntry
 
-#Reading the bird species list from a file
+#Reading the bird species list from a file and creating the Polish-Latin dictionary
 species_list_raw = []
 with open('species_list', encoding="UTF-8") as inFile:
     species_list_raw = [line for line in inFile]
@@ -13,6 +13,8 @@ species_list_latin_raw = []
 with open('species_list_latin') as inFile:
     species_list_latin_raw = [line for line in inFile]
 species_list_latin = [item.strip() for item in species_list_latin_raw]
+
+species_dictionary = {species_list[i]: species_list_latin[i] for i in range(len(species_list))}
 
 #Window definition
 new_entry = tkinter.Tk()

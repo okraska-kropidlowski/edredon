@@ -45,6 +45,11 @@ def open_location():
 
     location_window.mainloop()
 
+def list_selection(bird):
+    bird = select_species.get()
+    latin_bird = species_dictionary[bird]
+    print(bird, latin_bird)
+
 def save_entry():
     species = select_species.get()
     date = date_button.get_date()
@@ -61,6 +66,7 @@ species_label.grid(row=1)
 select_species = ttk.Combobox(species_label, state="readonly", values=tuple(species_list))
 select_species.current=""
 select_species.grid(row=1, column=0)
+select_species.bind("<<ComboboxSelected>>", list_selection)
 
 location_date_label = tkinter.LabelFrame(frame, text="LOCATION AND DATE")
 location_date_label.grid(row=2)

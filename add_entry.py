@@ -2,16 +2,17 @@
 import tkinter
 from tkinter import ttk
 import tkintermapview
-from tkcalendar import Calendar, DateEntry
+from tkcalendar import DateEntry
 
 #Reading the bird species list from a file
-species_list = []
+species_list_raw = []
 with open('species_list', encoding="UTF-8") as inFile:
-    species_list = [line for line in inFile]
-species_list_latin = []
+    species_list_raw = [line for line in inFile]
+species_list = [item.strip() for item in species_list_raw]
+species_list_latin_raw = []
 with open('species_list_latin') as inFile:
-    species_list_latin = [line for line in inFile]
-#latin_name = [species_list_latin.index(i) for i in species_list]
+    species_list_latin_raw = [line for line in inFile]
+species_list_latin = [item.strip() for item in species_list_latin_raw]
 
 #Window definition
 new_entry = tkinter.Tk()

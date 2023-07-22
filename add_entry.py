@@ -32,8 +32,10 @@ def open_location():
 
     def select_location(coordinates):
         global coordinates_simple
+        global latitude, longitude
         #print("Observation location:", coordinates)
         coordinates_simple = tuple([float("{0:.5f}".format(n)) for n in coordinates])
+        (latitude, longitude) = coordinates_simple
         location.config(text=coordinates_simple)
         location_window.destroy()
 
@@ -53,7 +55,7 @@ def list_selection(bird):
 def save_entry():
     species = select_species.get()
     date = date_button.get_date()
-    print(species, coordinates_simple, date)
+    print(species, "(", latitude, longitude, ")", date)
     new_entry.destroy()
 
 #Window and widgets layout
@@ -61,12 +63,17 @@ frame = tkinter.Frame(new_entry)
 frame.pack()
 
 species_label = tkinter.LabelFrame(frame, text="OBSERVED SPECIES")
-species_label.grid(row=1)
+species_label.grid(row=1, column=0)
+latin_label = tkinter.LabelFrame(frame, text="LATIN NAME")
+latin_label.grid(row=1, column=1)
 
 select_species = ttk.Combobox(species_label, state="readonly", values=tuple(species_list))
 select_species.current=""
 select_species.grid(row=1, column=0)
 select_species.bind("<<ComboboxSelected>>", list_selection)
+
+latin_species = tkinter.Label(latin_label, text="")
+latin_species.grid(row=1, column=1)
 
 location_date_label = tkinter.LabelFrame(frame, text="LOCATION AND DATE")
 location_date_label.grid(row=2)

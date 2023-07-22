@@ -50,6 +50,7 @@ def open_location():
 def list_selection(bird):
     bird = select_species.get()
     latin_bird = species_dictionary[bird]
+    latin_species.config(text=latin_bird)
     print(bird, latin_bird)
 
 def save_entry():
@@ -71,7 +72,6 @@ select_species = ttk.Combobox(species_label, state="readonly", values=tuple(spec
 select_species.current=""
 select_species.grid(row=1, column=0)
 select_species.bind("<<ComboboxSelected>>", list_selection)
-
 latin_species = tkinter.Label(latin_label, text="")
 latin_species.grid(row=1, column=1)
 

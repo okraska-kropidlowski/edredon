@@ -20,6 +20,7 @@ species_dictionary = {species_list[i]: species_list_latin[i] for i in range(len(
 new_entry = tkinter.Tk()
 new_entry.title("Add new entry")
 new_entry.geometry("1024x768")
+new_entry.iconbitmap("edredon.ico")
 new_entry.resizable(False, False)
 
 #Functions definition
@@ -33,7 +34,6 @@ def open_location():
     def select_location(coordinates):
         global coordinates_simple
         global latitude, longitude
-        #print("Observation location:", coordinates)
         coordinates_simple = tuple([float("{0:.5f}".format(n)) for n in coordinates])
         (latitude, longitude) = coordinates_simple
         location.config(text=coordinates_simple)
@@ -51,7 +51,7 @@ def list_selection(bird):
     bird = select_species.get()
     latin_bird = species_dictionary[bird]
     latin_species.config(text=latin_bird)
-    print(bird, latin_bird)
+    #print(bird, latin_bird)
 
 def save_entry():
     species = select_species.get()

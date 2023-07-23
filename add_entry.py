@@ -56,7 +56,9 @@ def list_selection(bird):
 def save_entry():
     species = select_species.get()
     date = date_button.get_date()
-    print(species, "(", latitude, longitude, ")", date)
+    latitude_string = str(latitude)
+    longitude_string = str(longitude)
+    print(species, "(" + latitude_string + ", "+ longitude_string + ")", date)
     new_entry.destroy()
 
 #Window and widgets layout

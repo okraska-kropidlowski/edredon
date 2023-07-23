@@ -29,6 +29,7 @@ def open_location():
     location_window = tkinter.Toplevel()
     location_window.title("Observation location")
     location_window.geometry("800x600")
+    location_window.iconbitmap("edredon.ico")
     location_window.resizable(False, False)
 
     def select_location(coordinates):

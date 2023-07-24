@@ -23,14 +23,17 @@ def profiles():
     profiles_window.resizable(False, False)
     profiles_window.mainloop()
 
-def view_entries():
-    os.system('view_entries.py')
+def view_entries(profile):
+    os.system('view_entries.py ' + profile)
 
-def add_entry():
-    os.system('add_entry.py')
+def add_entry(profile):
+    os.system('add_entry.py ' + profile)
 
 def about():
     os.system('about.py')
+
+#THIS WILL COME FROM MANAGE PROFILES SUBWINDOW
+active_profile = "TEST"
 
 #Window and widgets layout
 frame = tkinter.Frame(main_window)
@@ -48,10 +51,10 @@ image_label.grid(row=2, column=1)
 profiles_button = tkinter.Button(profiles_label, text="Profiles", command=profiles)
 profiles_button.grid(row=0, column=0, sticky="news", padx=20, pady=10)
 
-view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries)
+view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile))
 view_entries_button.grid(row=1, column=0, sticky="news", padx=20, pady=10)
 
-add_entry_button = tkinter.Button(menu_label, text="Add entry", command=add_entry)
+add_entry_button = tkinter.Button(menu_label, text="Add entry", command=lambda: add_entry(active_profile))
 add_entry_button.grid(row=2, column=0, sticky="news", padx=20, pady=10)
 
 about_button = tkinter.Button(menu_label, text="About", command=about)

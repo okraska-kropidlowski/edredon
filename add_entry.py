@@ -19,8 +19,8 @@ species_dictionary = {species_list[i]: species_list_latin[i] for i in range(len(
 #Window definition
 new_entry = tkinter.Tk()
 new_entry.title("Add new entry")
-new_entry.geometry("1024x768")
-new_entry.iconbitmap("edredon.ico")
+new_entry.geometry("800x600")
+new_entry.iconbitmap("data/images/edredon.ico")
 new_entry.resizable(False, False)
 
 #Functions definition
@@ -29,7 +29,7 @@ def open_location():
     location_window = tkinter.Toplevel()
     location_window.title("Observation location")
     location_window.geometry("800x600")
-    location_window.iconbitmap("edredon.ico")
+    location_window.iconbitmap("data/images/edredon.ico")
     location_window.resizable(False, False)
 
     def select_location(coordinates):

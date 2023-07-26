@@ -1,6 +1,6 @@
 #Imports
 import tkinter
-#from tkinter import ttk
+from tkinter import ttk
 from PIL import ImageTk, Image
 import os
 
@@ -13,6 +13,9 @@ main_window.resizable(False, False)
 edredon = Image.open("data/images/edredon_bg.png")
 background_image = ImageTk.PhotoImage(edredon)
 
+with open('data/profiles_list', encoding="UTF-8") as inFile:
+    profiles_list = [line for line in inFile]
+active_profile = ""
 
 #Functions definition
 def profiles():
@@ -21,6 +24,25 @@ def profiles():
     profiles_window.geometry("640x480")
     profiles_window.iconbitmap("data/images/edredon.ico")
     profiles_window.resizable(False, False)
+
+    profiles_frame = tkinter.Frame(profiles_window)
+    profiles_frame.pack()
+
+    def profile_selection(profile):
+        global active_profile
+        profile = select_profile.get()
+        active_profile = profile
+        print(active_profile)
+        profiles_window.destroy()
+
+    #Profiles window and widgets layout
+    profiles_window_label = tkinter.LabelFrame(profiles_frame, text="PROFILES LIST")
+    profiles_window_label.grid(row=0, column=0)
+    select_profile = ttk.Combobox(profiles_window_label, state="readonly", values=tuple(profiles_list))
+    select_profile.current=""
+    select_profile.grid(row=1, column=0)
+    select_profile.bind("<<ComboboxSelected>>", profile_selection)
+
     profiles_window.mainloop()
 
 def view_entries(profile):
@@ -33,7 +55,7 @@ def about():
     os.system('about.py')
 
 #THIS WILL COME FROM MANAGE PROFILES SUBWINDOW
-active_profile = "TEST"
+#active_profile = "TEST"
 
 #Window and widgets layout
 frame = tkinter.Frame(main_window)

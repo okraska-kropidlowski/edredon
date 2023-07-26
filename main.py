@@ -33,6 +33,8 @@ def profiles():
         profile = select_profile.get()
         active_profile = profile
         print(active_profile)
+        view_entries_button.config(state="active")
+        add_entry_button.config(state="active")
         profiles_window.destroy()
 
     #Profiles window and widgets layout
@@ -54,9 +56,6 @@ def add_entry(profile):
 def about():
     os.system('about.py')
 
-#THIS WILL COME FROM MANAGE PROFILES SUBWINDOW
-#active_profile = "TEST"
-
 #Window and widgets layout
 frame = tkinter.Frame(main_window)
 frame.pack()
@@ -73,10 +72,10 @@ image_label.grid(row=2, column=1)
 profiles_button = tkinter.Button(profiles_label, text="Profiles", command=profiles)
 profiles_button.grid(row=0, column=0, sticky="news", padx=20, pady=10)
 
-view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile))
+view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile), state="disabled")
 view_entries_button.grid(row=1, column=0, sticky="news", padx=20, pady=10)
 
-add_entry_button = tkinter.Button(menu_label, text="Add entry", command=lambda: add_entry(active_profile))
+add_entry_button = tkinter.Button(menu_label, text="Add entry", command=lambda: add_entry(active_profile), state="disabled")
 add_entry_button.grid(row=2, column=0, sticky="news", padx=20, pady=10)
 
 about_button = tkinter.Button(menu_label, text="About", command=about)

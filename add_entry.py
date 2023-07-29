@@ -4,6 +4,7 @@ from tkinter import ttk
 import tkintermapview
 from tkcalendar import DateEntry
 import sys
+import os
 
 #Reading the user profile
 user_profile = sys.argv[1]
@@ -50,21 +51,27 @@ def open_location():
     map_widget.set_position(51.77674, 19.45469)
     map_widget.set_zoom(50)
     map_widget.add_right_click_menu_command(label="Set location", command=select_location, pass_coords=True)
-
     location_window.mainloop()
 
 def list_selection(bird):
+    global latin_bird
     bird = select_species.get()
     latin_bird = species_dictionary[bird]
     latin_species.config(text=latin_bird)
-    #print(bird, latin_bird)
+
+def send_to_db(db_profile, db_species, db_latin_species, db_location, db_date):
+    os.system('save_entry.py ' + db_profile + db_species + db_latin_species + db_location + db_date)
 
 def save_entry():
     species = select_species.get()
+    latin_species = latin_bird
     date = date_button.get_date()
+    date_string = str(date)
     latitude_string = str(latitude)
     longitude_string = str(longitude)
-    print(species, "(" + latitude_string + ", "+ longitude_string + ")", date)
+    location_string = "(" + latitude_string + ", "+ longitude_string + ")"
+    print(species, location_string, date)
+    send_to_db(user_profile, species, latin_species, location_string, date_string)
     new_entry.destroy()
 
 #Window and widgets layout

@@ -44,7 +44,6 @@ def profiles():
     select_profile.current=""
     select_profile.grid(row=1, column=0)
     select_profile.bind("<<ComboboxSelected>>", profile_selection)
-
     profiles_window.mainloop()
 
 def view_entries(profile):

@@ -5,6 +5,7 @@ import tkintermapview
 from tkcalendar import DateEntry
 import sys
 import os
+import sqlite3
 
 #Reading the user profile
 user_profile = sys.argv[1]
@@ -59,19 +60,25 @@ def list_selection(bird):
     latin_bird = species_dictionary[bird]
     latin_species.config(text=latin_bird)
 
-def send_to_db(db_profile, db_species, db_latin_species, db_location, db_date):
-    os.system('save_entry.py ' + db_profile + db_species + db_latin_species + db_location + db_date)
-
 def save_entry():
     species = select_species.get()
     latin_species = latin_bird
-    date = date_button.get_date()
-    date_string = str(date)
     latitude_string = str(latitude)
     longitude_string = str(longitude)
     location_string = "(" + latitude_string + ", "+ longitude_string + ")"
-    print(species, location_string, date)
-    send_to_db(user_profile, species, latin_species, location_string, date_string)
+    date = date_button.get_date()
+    date_string = str(date)
+    #Create table in db
+    conn = sqlite3.connect(user_profile + '.db')
+    table_create_query = '''CREATE TABLE IF NOT EXISTS Observation (species TEXT, species_latin TEXT, location TEXT, date TEXT)'''
+    conn.execute(table_create_query)   
+    #Insert data into the table
+    data_insert_query = '''INSERT INTO Observation (species, species_latin, location, date) VALUES (?, ?, ?, ?)'''
+    data_insert_tuple = (species, latin_species, location_string, date_string)
+    cursor = conn.cursor()
+    cursor.execute(data_insert_query, data_insert_tuple)
+    conn.commit()
+    conn.close()
     new_entry.destroy()
 
 #Window and widgets layout

@@ -4,7 +4,6 @@ from tkinter import ttk
 import tkintermapview
 from tkcalendar import DateEntry
 import sys
-import os
 import sqlite3
 
 #Reading the user profile
@@ -13,11 +12,11 @@ print(user_profile)
 
 #Reading the bird species list from a file and creating the Polish-Latin dictionary
 species_list_raw = []
-with open('species_list', encoding="UTF-8") as inFile:
+with open('data/species_list', encoding="UTF-8") as inFile:
     species_list_raw = [line for line in inFile]
 species_list = [item.strip() for item in species_list_raw]
 species_list_latin_raw = []
-with open('species_list_latin') as inFile:
+with open('data/species_list_latin') as inFile:
     species_list_latin_raw = [line for line in inFile]
 species_list_latin = [item.strip() for item in species_list_latin_raw]
 

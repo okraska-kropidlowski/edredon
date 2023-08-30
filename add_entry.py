@@ -68,7 +68,7 @@ def save_entry():
     date = date_button.get_date()
     date_string = str(date)
     #Create table in db
-    conn = sqlite3.connect(user_profile + '.db')
+    conn = sqlite3.connect('database/' + user_profile + '.db')
     table_create_query = '''CREATE TABLE IF NOT EXISTS Observation (species TEXT, species_latin TEXT, location TEXT, date TEXT)'''
     conn.execute(table_create_query)   
     #Insert data into the table

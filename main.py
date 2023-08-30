@@ -7,7 +7,7 @@ import os
 #Window definition
 main_window = tkinter.Tk()
 main_window.title("edredon")
-main_window.geometry("800x600")
+main_window.geometry("520x600")
 main_window.iconbitmap("data/images/edredon.ico")
 main_window.resizable(False, False)
 edredon = Image.open("data/images/edredon_bg.png")
@@ -59,14 +59,14 @@ def about():
 frame = tkinter.Frame(main_window)
 frame.pack()
 
-menu_label = tkinter.LabelFrame(frame, text="MAIN MENU")
-menu_label.grid(row=1, column=0, sticky="w")
-
 profiles_label = tkinter.LabelFrame(frame, bd=0, text="")
-profiles_label.grid(row=1, column=1)
+profiles_label.grid(row=1, column=0, pady=50)
+
+menu_label = tkinter.LabelFrame(frame, text="MAIN MENU")
+menu_label.grid(row=2, column=0)
 
 image_label = tkinter.Label(frame, image=background_image)
-image_label.grid(row=2, column=1)
+image_label.grid(row=1, column=1, padx=20, pady=50)
 
 profiles_button = tkinter.Button(profiles_label, text="Profiles", command=profiles)
 profiles_button.grid(row=0, column=0, sticky="news", padx=20, pady=10)

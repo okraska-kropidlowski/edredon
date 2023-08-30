@@ -7,7 +7,6 @@ import os
 #Window definition
 main_window = tkinter.Tk()
 main_window.title("edredon")
-main_window.geometry("520x600")
 main_window.iconbitmap("data/images/edredon.ico")
 main_window.resizable(False, False)
 edredon = Image.open("data/images/edredon_bg.png")
@@ -60,21 +59,27 @@ frame = tkinter.Frame(main_window)
 frame.pack()
 
 menu_label = tkinter.LabelFrame(frame, text="MAIN MENU")
-menu_label.grid(row=1, column=0)
+menu_label.grid(column=0)
 
 image_label = tkinter.Label(frame, image=background_image)
-image_label.grid(row=1, column=1, padx=20, pady=50)
+image_label.grid(column=1)
+
+for widget_menu_component in frame.winfo_children():
+    widget_menu_component.grid_configure(row=1, padx=15, pady=15)
 
 profiles_button = tkinter.Button(menu_label, text="Profiles", command=profiles)
-profiles_button.grid(row=0, column=0, sticky="news", padx=20, pady=10)
+profiles_button.grid(row=0)
 
 view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile), state="disabled")
-view_entries_button.grid(row=1, column=0, sticky="news", padx=20, pady=10)
+view_entries_button.grid(row=1)
 
 add_entry_button = tkinter.Button(menu_label, text="Add entry", command=lambda: add_entry(active_profile), state="disabled")
-add_entry_button.grid(row=2, column=0, sticky="news", padx=20, pady=10)
+add_entry_button.grid(row=2)
 
 about_button = tkinter.Button(menu_label, text="About", command=about)
-about_button.grid(row=3, column=0, sticky="news", padx=20, pady=10)
+about_button.grid(row=3)
+
+for widget_button in menu_label.winfo_children():
+    widget_button.grid_configure(column=0, sticky="news", padx=20, pady=10)
 
 main_window.mainloop()

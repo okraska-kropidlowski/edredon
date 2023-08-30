@@ -59,16 +59,13 @@ def about():
 frame = tkinter.Frame(main_window)
 frame.pack()
 
-profiles_label = tkinter.LabelFrame(frame, bd=0, text="")
-profiles_label.grid(row=1, column=0, pady=50)
-
 menu_label = tkinter.LabelFrame(frame, text="MAIN MENU")
-menu_label.grid(row=2, column=0)
+menu_label.grid(row=1, column=0)
 
 image_label = tkinter.Label(frame, image=background_image)
 image_label.grid(row=1, column=1, padx=20, pady=50)
 
-profiles_button = tkinter.Button(profiles_label, text="Profiles", command=profiles)
+profiles_button = tkinter.Button(menu_label, text="Profiles", command=profiles)
 profiles_button.grid(row=0, column=0, sticky="news", padx=20, pady=10)
 
 view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile), state="disabled")

@@ -27,23 +27,18 @@ def profiles():
     profiles_frame = tkinter.Frame(profiles_window)
     profiles_frame.pack()
 
-    def profile_selection(profile):
-        global active_profile
-        profile = select_profile.get()
-        active_profile = profile
-        print(active_profile)
-        view_entries_button.config(state="active")
-        add_entry_button.config(state="active")
-        profiles_window.destroy()
-
     #Profiles window and widgets layout
     profiles_window_label = tkinter.LabelFrame(profiles_frame, text="PROFILES LIST")
     profiles_window_label.grid(row=0, column=0)
-    select_profile = ttk.Combobox(profiles_window_label, state="readonly", values=tuple(profiles_list))
-    select_profile.current=""
-    select_profile.grid(row=1, column=0)
-    select_profile.bind("<<ComboboxSelected>>", profile_selection)
     profiles_window.mainloop()
+
+def profile_selection(profile):
+    global active_profile
+    profile = select_profile.get()
+    active_profile = profile
+    print(active_profile)
+    view_entries_button.config(state="active")
+    add_entry_button.config(state="active")
 
 def view_entries(profile):
     os.system('view_entries.py ' + profile)
@@ -67,17 +62,22 @@ image_label.grid(column=1)
 for widget_menu_component in frame.winfo_children():
     widget_menu_component.grid_configure(row=1, padx=15, pady=15)
 
+select_profile = ttk.Combobox(menu_label, state="readonly", values=tuple(profiles_list))
+select_profile.current=""
+select_profile.grid(row=0)
+select_profile.bind("<<ComboboxSelected>>", profile_selection)
+
 profiles_button = tkinter.Button(menu_label, text="Profiles", command=profiles)
-profiles_button.grid(row=0)
+profiles_button.grid(row=1)
 
 view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile), state="disabled")
-view_entries_button.grid(row=1)
+view_entries_button.grid(row=2)
 
 add_entry_button = tkinter.Button(menu_label, text="Add entry", command=lambda: add_entry(active_profile), state="disabled")
-add_entry_button.grid(row=2)
+add_entry_button.grid(row=3)
 
 about_button = tkinter.Button(menu_label, text="About", command=about)
-about_button.grid(row=3)
+about_button.grid(row=4)
 
 for widget_button in menu_label.winfo_children():
     widget_button.grid_configure(column=0, sticky="news", padx=20, pady=10)

@@ -2,7 +2,6 @@
 import tkinter
 from tkinter import ttk
 
-
 #Window definition
 about = tkinter.Tk()
 about.title("About edredon")

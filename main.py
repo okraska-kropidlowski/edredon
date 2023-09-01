@@ -40,6 +40,9 @@ def profile_selection(profile):
     view_entries_button.config(state="active")
     add_entry_button.config(state="active")
 
+def manage_profiles():
+    os.system('profiles.py')
+
 def view_entries(profile):
     os.system('view_entries.py ' + profile)
 
@@ -67,7 +70,7 @@ select_profile.current=""
 select_profile.grid(row=0)
 select_profile.bind("<<ComboboxSelected>>", profile_selection)
 
-profiles_button = tkinter.Button(menu_label, text="Profiles", command=profiles)
+profiles_button = tkinter.Button(menu_label, text="Manage profiles", command=manage_profiles)
 profiles_button.grid(row=1)
 
 view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile), state="disabled")

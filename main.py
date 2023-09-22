@@ -73,7 +73,7 @@ select_profile.bind("<<ComboboxSelected>>", profile_selection)
 profiles_button = tkinter.Button(menu_label, text="Manage profiles", command=manage_profiles)
 profiles_button.grid(row=1)
 
-view_entries_button = tkinter.Button(menu_label, text="View entries", command=view_entries(active_profile), state="disabled")
+view_entries_button = tkinter.Button(menu_label, text="View entries", command=lambda: view_entries(active_profile), state="disabled")
 view_entries_button.grid(row=2)
 
 add_entry_button = tkinter.Button(menu_label, text="Add entry", command=lambda: add_entry(active_profile), state="disabled")

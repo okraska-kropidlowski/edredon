@@ -5,7 +5,6 @@ import sys
 
 #Reading the user profile
 user_profile = sys.argv[1]
-print(user_profile)
 
 #Window definition
 view_entries = tkinter.Tk()

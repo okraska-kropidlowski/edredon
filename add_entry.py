@@ -8,7 +8,6 @@ import sqlite3
 
 #Reading the user profile
 user_profile = sys.argv[1]
-print(user_profile)
 
 #Reading the bird species list from a file and creating the Polish-Latin dictionary
 species_list_raw = []

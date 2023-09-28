@@ -14,6 +14,8 @@ view_entries.iconbitmap("data/images/edredon.ico")
 #view_entries.resizable(False, False)
 
 conn = sqlite3.connect('database/' + user_profile + '.db')
+table_create_query = '''CREATE TABLE IF NOT EXISTS Observation (species TEXT, species_latin TEXT, location TEXT, date TEXT)'''
+conn.execute(table_create_query)
 cursor = conn.cursor()
 cursor.execute('SELECT * FROM "Observation"')
 entries_list = cursor.fetchall()

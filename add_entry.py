@@ -27,7 +27,17 @@ new_entry.title("Add new entry")
 new_entry.iconbitmap("data/images/edredon.ico")
 new_entry.resizable(False, False)
 
+saving_species = ""
+saving_coordinates = ""
+
 #Functions definition
+def allow_saving():
+    global saving_species
+    global saving_coordinates
+    print(saving_species, saving_coordinates)
+    if (saving_coordinates != "" and saving_species != ""):
+        save_button.config(state="active")
+
 def open_location():
     global location
     location_window = tkinter.Toplevel()
@@ -37,11 +47,14 @@ def open_location():
     location_window.resizable(False, False)
 
     def select_location(coordinates):
+        global saving_coordinates
         global coordinates_simple
         global latitude, longitude
         coordinates_simple = tuple([float("{0:.5f}".format(n)) for n in coordinates])
         (latitude, longitude) = coordinates_simple
         location.config(text=coordinates_simple)
+        saving_coordinates = coordinates_simple
+        allow_saving()
         location_window.destroy()
 
     map_widget = tkintermapview.TkinterMapView(location_window, width=800, height=600, corner_radius=0)
@@ -53,11 +66,16 @@ def open_location():
 
 def list_selection(bird):
     global latin_bird
+    global saving_species
     bird = select_species.get()
     latin_bird = species_dictionary[bird]
     latin_species.config(text=latin_bird)
+    saving_species = bird
+    allow_saving()
 
 def save_entry():
+    global date
+    global species
     species = select_species.get()
     latin_species = latin_bird
     latitude_string = str(latitude)
@@ -113,7 +131,7 @@ date_button = DateEntry(select_date, date_pattern='dd.mm.yyyy')
 date_button.grid(column=0)
 
 #Entry saving
-save_button = tkinter.Button(frame, text="Add observation", command=save_entry)
+save_button = tkinter.Button(frame, text="Add observation", command=save_entry, state="disabled")
 save_button.grid(row=3, column=0, sticky="news", padx=20, pady=10)
 
 new_entry.mainloop()

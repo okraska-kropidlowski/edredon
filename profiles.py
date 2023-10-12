@@ -8,13 +8,16 @@ profiles.title("Manage profiles")
 profiles.iconbitmap("data/images/edredon.ico")
 profiles.resizable(False, False)
 
-with open ('data\profiles_list') as profiles_file:
+with open ('data/profiles_list') as profiles_file:
     profiles_file_content = profiles_file.read()
+
+with open ('data/profiles_list') as profiles_file:
+    profiles_list = [line for line in profiles_file]
 
 #Functions definition
 def add_profile():
     new_profile = add_profile_box.get('1.0', 'end-1c')
-    with open('data\profiles_list', "a") as profiles_file:
+    with open('data/profiles_list', "a") as profiles_file:
         if profiles_file_content == '':
             profiles_file.write(new_profile)
             add_profile_box.delete('1.0', 'end')
@@ -32,6 +35,13 @@ add_profile_box.grid(column=0, row=0)
 
 add_button = tkinter.Button(profiles_label, text="Add profile", command=add_profile)
 add_button.grid(column=1, row=0)
+
+remove_profile_list = ttk.Combobox(profiles_label, state="readonly", values=tuple(profiles_list))
+remove_profile_list.current=""
+remove_profile_list.grid(column=0, row=1)
+
+remove_button = tkinter.Button(profiles_label, text="Remove profile")
+remove_button.grid(column=1, row=1)
 
 for widget in profiles_label.winfo_children():
     widget.grid_configure(sticky="news", padx=20, pady=10)

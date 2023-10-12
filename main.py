@@ -12,8 +12,8 @@ main_window.resizable(False, False)
 edredon = Image.open("data/images/edredon_bg.png")
 background_image = ImageTk.PhotoImage(edredon)
 
-with open('data/profiles_list', encoding="UTF-8") as inFile:
-    profiles_list = [line for line in inFile]
+with open('data/profiles_list', encoding="UTF-8") as profiles_file:
+    profiles_list = [line for line in profiles_file]
 active_profile = ""
 
 #Functions definition

@@ -44,7 +44,7 @@ def remove_profile():
 profiles_label = tkinter.LabelFrame(profiles, text="MANAGE PROFILES")
 profiles_label.grid(column=0)
 
-add_profile_box = tkinter.Text(profiles_label, height=1, width=20)
+add_profile_box = tkinter.Entry(profiles_label, height=1, width=20)
 add_profile_box.grid(column=0, row=0)
 
 add_button = tkinter.Button(profiles_label, text="Add profile", command=add_profile)

@@ -8,9 +8,9 @@ profiles.title("Manage profiles")
 profiles.iconbitmap("data/images/edredon.ico")
 profiles.resizable(False, False)
 
+#Load profiles list and analyse its contents
 with open ('data/profiles_list') as profiles_file:
     profiles_file_content = profiles_file.read()
-
 with open ('data/profiles_list') as profiles_file:
     profiles_list = [line for line in profiles_file]
 
@@ -44,7 +44,7 @@ def remove_profile():
 profiles_label = tkinter.LabelFrame(profiles, text="MANAGE PROFILES")
 profiles_label.grid(column=0)
 
-add_profile_box = tkinter.Entry(profiles_label, height=1, width=20)
+add_profile_box = tkinter.Entry(profiles_label, width=50)
 add_profile_box.grid(column=0, row=0)
 
 add_button = tkinter.Button(profiles_label, text="Add profile", command=add_profile)

@@ -26,6 +26,14 @@ def add_profile():
             profiles_file.write(new_profile)
             add_profile_box.delete('1.0', 'end')
 
+def profile_name_check(profile_entry):
+    if (profile_entry.isalnum() or profile_entry in ['_', '-']):
+        return True
+    else:                                                 
+        return False
+    
+characters_check = (profiles.register(profile_name_check), '%S')
+
 def profile_selection(profile):
     global to_be_deleted
     profile = remove_profile_list.get()
@@ -44,7 +52,7 @@ def remove_profile():
 profiles_label = tkinter.LabelFrame(profiles, text="MANAGE PROFILES")
 profiles_label.grid(column=0)
 
-add_profile_box = tkinter.Entry(profiles_label, width=50)
+add_profile_box = tkinter.Entry(profiles_label, width=50, validate='key', validatecommand=characters_check)
 add_profile_box.grid(column=0, row=0)
 
 add_button = tkinter.Button(profiles_label, text="Add profile", command=add_profile)

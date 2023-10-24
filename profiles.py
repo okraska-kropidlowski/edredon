@@ -16,15 +16,15 @@ with open ('data/profiles_list') as profiles_file:
 
 #Functions definition
 def add_profile():
-    new_profile = add_profile_box.get('1.0', 'end-1c')
+    new_profile = add_profile_box.get()
     with open('data/profiles_list', "a") as profiles_file:
         if profiles_file_content == '':
             profiles_file.write(new_profile)
-            add_profile_box.delete('1.0', 'end')
+            add_profile_box.delete(1)
         elif not profiles_file_content.endswith('\n'):
             profiles_file.write('\n')
             profiles_file.write(new_profile)
-            add_profile_box.delete('1.0', 'end')
+            add_profile_box.delete(1)
 
 def profile_name_check(profile_entry):
     if (profile_entry.isalnum() or profile_entry in ['_', '-']):

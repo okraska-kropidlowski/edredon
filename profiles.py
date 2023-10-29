@@ -1,6 +1,7 @@
 #Imports
 import tkinter
 from tkinter import ttk
+from tkinter import messagebox
 
 #Window definition
 profiles = tkinter.Tk()
@@ -19,17 +20,22 @@ def add_profile():
     new_profile = add_profile_box.get()
     if len(new_profile) > 16:
         new_profile = new_profile[:16]
-    with open('data/profiles_list', "a") as profiles_file:
-        if profiles_file_content == '':
-            profiles_file.write(new_profile)
-            profiles.destroy()
-        elif not profiles_file_content.endswith('\n'):
-            profiles_file.write('\n')
-            profiles_file.write(new_profile)
-            profiles.destroy()
-        elif profiles_file_content.endswith('\n'):
-            profiles_file.write(new_profile)
-            profiles.destroy()
+    #with open('data/profiles_list', "r") as existing_profiles:
+    if new_profile in profiles_file_content:
+        messagebox.showerror(title="Profile already existing", message="Profile with this name already exists. Please use another name.")
+        return
+    else: 
+        with open('data/profiles_list', "a") as profiles_file:
+            if profiles_file_content == '':
+                    profiles_file.write(new_profile)
+                    profiles.destroy()
+            elif not profiles_file_content.endswith('\n'):
+                    profiles_file.write('\n')
+                    profiles_file.write(new_profile)
+                    profiles.destroy()
+            elif profiles_file_content.endswith('\n'):
+                    profiles_file.write(new_profile)
+                    profiles.destroy()
 
 def profile_name_check(profile_entry):
     if (profile_entry.isalnum() or profile_entry in ['_', '-']):

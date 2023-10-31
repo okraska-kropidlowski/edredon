@@ -24,22 +24,33 @@ def add_profile():
     #with open('data/profiles_list', "r") as existing_profiles:
     if new_profile in profiles_file_content:
         messagebox.showerror(title="Profile already existing", message="Profile with this name already exists. Please use another name.")
-        return
-    else: 
-        with open('data/profiles_list', "a") as profiles_file:
-            if profiles_file_content == '':
-                    profiles_file.write(new_profile)
-                    add_profile_box.delete(0, tkinter.END)
-                    return
-            elif not profiles_file_content.endswith('\n'):
-                    profiles_file.write('\n')
-                    profiles_file.write(new_profile)
-                    add_profile_box.delete(0, tkinter.END)
-                    return
-            elif profiles_file_content.endswith('\n'):
-                    profiles_file.write(new_profile)
-                    add_profile_box.delete(0, tkinter.END)
-                    return
+        return 
+    with open('data/profiles_list', "a") as profiles_file:
+        if profiles_file_content == '':
+                profiles_file.write(new_profile)
+                add_profile_box.delete(0, tkinter.END)
+                with open ('data/profiles_list') as profiles_file_updated:
+                    profiles_list_updated = [line for line in profiles_file_updated]
+                    profiles_file_content = profiles_file_updated.read()
+                remove_profile_list.config(values=tuple(profiles_list_updated))
+                profiles.update()
+        elif not profiles_file_content.endswith('\n'):
+                profiles_file.write('\n')
+                profiles_file.write(new_profile)
+                add_profile_box.delete(0, tkinter.END)
+                with open ('data/profiles_list') as profiles_file_updated:
+                    profiles_list_updated = [line for line in profiles_file_updated]
+                    profiles_file_content = profiles_file_updated.read()
+                remove_profile_list.config(values=tuple(profiles_list_updated))
+                profiles.update()
+        elif profiles_file_content.endswith('\n'):
+                profiles_file.write(new_profile)
+                add_profile_box.delete(0, tkinter.END)
+                with open ('data/profiles_list') as profiles_file_updated:
+                    profiles_list_updated = [line for line in profiles_file_updated]
+                    profiles_file_content = profiles_file_updated.read()
+                remove_profile_list.config(values=tuple(profiles_list_updated))
+                profiles.update()
 
 def profile_name_check(profile_entry):
     if (profile_entry.isalnum() or profile_entry in ['_', '-']):
